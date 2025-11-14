@@ -1,0 +1,22 @@
+| Test Type               | Description                                                                | Tool/Method                         |
+| ----------------------- | -------------------------------------------------------------------------- | ----------------------------------- |
+| **Functional Testing**  | Validate that APIs (authentication, upload) return expected HTTP responses | `curl`, status code checks          |
+| **Integration Testing** | Ensure data flow between login and upload stages works correctly           | Token reuse and upload verification |
+| **Regression Testing**  | Confirm no change breaks existing flows                                    | Script reruns under GitHub Actions  |
+| **Negative Testing**    | Simulate invalid credentials or versions                                   | Controlled variable alteration      |
+
+
+
+| Priority  | Area               | Reason                            |
+| --------- | ------------------ | --------------------------------- |
+| 🔴 High   | Authentication API | Required for all other operations |
+| 🟡 Medium | File upload API    | Central to automation purpose     |
+| 🟢 Low    | Template API       | Optional verification endpoint    |
+
+
+| Risk                | Impact                 | Mitigation                        |
+| ------------------- | ---------------------- | --------------------------------- |
+| Invalid Credentials | Authentication failure | Implement retries or skip logic   |
+| API Downtime        | CI/CD test failure     | Use retry with sleep or fallback  |
+| File Corruption     | Upload failure         | Add checksum or hash verification |
+| Rate Limiting       | Request blocking       | Add delay or exponential backoff  |
